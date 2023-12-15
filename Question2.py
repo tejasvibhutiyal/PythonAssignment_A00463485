@@ -4,37 +4,26 @@
 import pandas as pd 
 import re
 
-def count_vowels(column):
+def count_vowels(s):
     """
-    Count the number of vowels in each string of the given column.
+    Count the number of vowels in a string.
 
     Args:
-    column (pd.Series): A Pandas Series containing strings.
+    s (str): A string.
 
     Returns:
-    list: A list containing the count of vowels in each string of the column.
+    int: The count of vowels in the string.
     """
-    numberOfVowels= []
-    for i in column:
-        # Use regex to find all vowels in the string
-        x = re.findall("[aeiouAEIOU]", i)
-        numberOfVowels.append(len(x))
-    return numberOfVowels
+    return len(re.findall('[aeiouAEIOU]', s))
 
-
+# Read data from file
 df = pd.read_csv('titles.csv')
 
-print('Total number of rows in file:',len(df))
+# Ensure the 'title' column is of string type
+df['title'] = df['title'].astype(str)
 
-#Change the column 'title' to column whose vowels you want to count
-# Convert the 'title' column to string type to ensure proper vowel counting
-column = df['title'].astype(str)
+# Apply the function to count vowels in the 'title' column
+df['vowel_count'] = df['title'].apply(count_vowels)
 
-print('Total values in given column: ' , len(column))
-numberOfvowels = count_vowels(column)
-
-print('Displaying Number of Vowels in first 20 values of the given column:')
-
-for i in range(20):
-    print(column[i] , ':', numberOfvowels[i])
-
+# Display the DataFrame
+print(df.head(20))
