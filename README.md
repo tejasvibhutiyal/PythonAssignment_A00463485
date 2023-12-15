@@ -5,7 +5,7 @@ Output:<br>
 
 ## Question 2:
 Output:<br>
-![Alt text](image.png)
+![Alt text](Solution2.png)
 
 ## Question 3:
 Output:<br>
